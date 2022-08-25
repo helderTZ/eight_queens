@@ -1,27 +1,33 @@
 from typing import Tuple, List
+from functools import lru_cache
 
+@lru_cache
 def get_diagonal(row: int, col: int) -> List[Tuple[int, int]]:
     positions = []
     r, c = row, col
-    while r >= 0 or c >= 0:
+    while r >= 0 and c >= 0:
+        if (r,c) != (row,col):
+            positions.append((r, c))
         r -= 1
         c -= 1
-        positions.append((r, c))
     r, c = row, col
-    while r < 8 or c < 8:
+    while r < 8 and c < 8:
+        if (r,c) != (row,col):
+            positions.append((r, c))
         r += 1
         c += 1
-        positions.append((r, c))
     r, c = row, col
-    while r >= 0 or c < 8:
+    while r >= 0 and c < 8:
+        if (r,c) != (row,col):
+            positions.append((r, c))
         r -= 1
         c += 1
-        positions.append((r, c))
     r, c = row, col
-    while r < 8 or c >= 0:
+    while r < 8 and c >= 0:
+        if (r,c) != (row,col):
+            positions.append((r, c))
         r += 1
         c -= 1
-        positions.append((r, c))
     return positions
 
 
